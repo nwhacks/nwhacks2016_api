@@ -9,24 +9,25 @@ class Registration(models.Model):
         (3, "large"),
         (4, "extra large")]
     STATUS = [
-        (0, "accepted"),
-        (1, "waitlisted")]
+        (0, "applied"),
+        (1, "accepted"),
+        (2, "waitlisted"),
+        (3, "rejected")]
 
-    email = models.EmailField()
+    email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     university = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
+    github = models.CharField(max_length=200, blank=True, null=True)
+    linkedin = models.CharField(max_length=200, blank=True, null=True)
+    personal_site = models.CharField(max_length=200, blank=True, null=True)
     tshirt_size = models.PositiveSmallIntegerField(choices=TSHIRT_SIZES)
-    travel_subsidy = models.PositiveSmallIntegerField(blank=True, null=True)
+    travel_subsidy = models.BooleanField()
+    first_hackathon = models.BooleanField()
+    mentor = models.BooleanField()
+    resume = models.FileField(blank=True, null=True)
     status = models.PositiveSmallIntegerField(choices=STATUS)
+    reason = models.TextField()
 
     def __str__(self):
         return self.name
-
-class Link(models.Model):
-    registration = models.ForeignKey(Registration, related_name="links")
-    name = models.CharField(max_length=200)
-    url = models.URLField()
-
-    def __str__(self):
-        return "%s %s" % (self.registration, self.name)
