@@ -4,20 +4,29 @@ from rest_framework import routers, serializers, viewsets
 
 from .models import Registration
 
+import hack16.views
+
+class FormToSerializerBooleanField(serializers.BooleanField):
+    ''' workaround to convert django form field to serializer form field
+    see my issue https://github.com/tomchristie/django-rest-framework/issues/2394
+    '''
+    TRUE_VALUES = set(('t', 'T', 'true', 'True', 'TRUE', '1', 1, True,'On','on','ON'))
+    FALSE_VALUES = set(('f', 'F', 'false', 'False', 'FALSE', '0', 0, 0.0, False,'Off','off','OFF'))
+
 class RegistrationSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    email = serializers.EmailField()
-    school = serializers.CharField()
-    city = serializers.CharField()
-    github = serializers.CharField(allow_blank=True)
-    linkedin = serializers.CharField(allow_blank=True)
-    personalsite = serializers.CharField(allow_blank=True)
-    resume = serializers.FileField(allow_empty_file=True)
-    tshirt = serializers.ChoiceField(("S", "M", "L", "XL"))
-    travel_reinbursement = serializers.BooleanField()
-    first_hackathon = serializers.BooleanField()
-    mentor = serializers.BooleanField()
-    reason = serializers.CharField()
+    name = serializers.CharField(write_only=True)
+    email = serializers.CharField(write_only=True)
+    school = serializers.CharField(write_only=True)
+    city = serializers.CharField(write_only=True)
+    github = serializers.CharField(allow_blank=True, write_only=True)
+    linkedin = serializers.CharField(allow_blank=True, write_only=True)
+    personalsite = serializers.CharField(allow_blank=True, write_only=True)
+    resume = serializers.FileField(required=False, write_only=True)
+    tshirt = serializers.ChoiceField(("S", "M", "L", "XL"), write_only=True)
+    travel_reinbursement = FormToSerializerBooleanField(write_only=True)
+    first_hackathon = FormToSerializerBooleanField(write_only=True)
+    mentor = FormToSerializerBooleanField(write_only=True)
+    reason = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
         reg = Registration()
@@ -78,9 +87,10 @@ class RegistrationViewSet(viewsets.ModelViewSet):
     serializer_class = RegistrationSerializer
 
 router = routers.DefaultRouter()
-router.register(r'user', RegistrationViewSet)
+router.register(r'register', RegistrationViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^$', hack16.views.app),
+    url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
