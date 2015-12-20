@@ -32,7 +32,7 @@ router = routers.DefaultRouter()
 router.register(r'register', RegistrationViewSet)
 
 urlpatterns = [
+    # this serves the application page, remove in production
     url(r'^$', hack16.views.app),
     url(r'^api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
