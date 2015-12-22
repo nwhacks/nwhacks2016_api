@@ -4,8 +4,6 @@ from rest_framework import routers, serializers, viewsets
 
 from .models import Registration
 
-import hack16.views
-
 class FormToSerializerBooleanField(serializers.BooleanField):
     ''' workaround to convert django form field to serializer form field
     see my issue https://github.com/tomchristie/django-rest-framework/issues/2394
@@ -32,7 +30,5 @@ router = routers.DefaultRouter()
 router.register(r'register', RegistrationViewSet)
 
 urlpatterns = [
-    # this serves the application page, remove in production
-    url(r'^$', hack16.views.app),
     url(r'^api/', include(router.urls)),
 ]
