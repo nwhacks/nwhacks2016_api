@@ -20,7 +20,7 @@ class Registration(models.Model):
     city = models.CharField(max_length=200)
     github = models.CharField(max_length=200, blank=True, null=True)
     linkedin = models.CharField(max_length=200, blank=True, null=True)
-    personalsite = models.CharField(max_length=200, blank=True, null=True)
+    personalsite = models.URLField(blank=True, null=True)
     resume = models.FileField(blank=True, null=True)
     tshirt = models.CharField(max_length=4, choices=TSHIRT_SIZES)
     travel_reinbursement = models.BooleanField()
