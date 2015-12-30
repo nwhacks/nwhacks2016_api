@@ -30,5 +30,5 @@ router = routers.DefaultRouter()
 router.register(r'register', RegistrationViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^/api', include(router.urls)),
 ]
