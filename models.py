@@ -15,7 +15,7 @@ class Registration(models.Model):
         (3, "rejected")]
 
     name = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+    email = models.EmailField()
     school = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     github = models.CharField(max_length=200, blank=True, null=True)
