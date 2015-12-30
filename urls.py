@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 
-from rest_framework import routers, serializers, mixins
+from rest_framework import routers, serializers, viewsets, mixins
 
 from .models import Registration
 
@@ -22,7 +22,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
                   'resume', 'tshirt', 'travel_reinbursement', 'first_hackathon', 'mentor',
                   'reason')
 
-class RegistrationViewSet(mixins.CreateModelMixin):
+class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
 
