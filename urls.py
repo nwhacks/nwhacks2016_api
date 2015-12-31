@@ -26,7 +26,7 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register(r'register', RegistrationViewSet)
 
 urlpatterns = [
