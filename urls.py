@@ -26,15 +26,15 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         message = EmailMultiAlternatives("nwHacks 2016 Registration Confirmation",
                                          render_to_string("nwhacks2016/email.txt", {
                                              "name": instance.name
-                                         },
+                                         }),
                                          "noreply@nwhacks.io",
                                          [instance.email],
-                                         reply_to=["apply@nwhacks.io"]))
+                                         reply_to=["apply@nwhacks.io"])
 
         # attach html content
         message.attach_alternative(render_to_string("nwhacks2016/email.html", {
             "name": instance.name
-        }, "text/html"))
+        }), "text/html")
 
         # send the message
         message.send()
