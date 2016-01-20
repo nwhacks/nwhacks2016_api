@@ -3,3 +3,6 @@ Hi {{ name }},
 Thanks for applying to nwHacks! We've received your application and will be reviewing them in the next few weeks. We hope to see you in February!
 Cheers,
 The nwHacks Team
+
+Website <https://nwhacks.io>
+Email Us <sponsorship@nwhacks.io>
