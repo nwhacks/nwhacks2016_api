@@ -4,8 +4,6 @@ from django.template.loader import render_to_string
 
 from rest_framework import routers, serializers, viewsets, mixins
 
-from premailer import transform
-
 from .models import Registration
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -34,9 +32,9 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
                                          reply_to=["apply@nwhacks.io"])
 
         # attach html content
-        message.attach_alternative(transform(render_to_string("nwhacks2016/email.html", {
+        message.attach_alternative(render_to_string("nwhacks2016/email.html", {
             "name": instance.name
-        })), "text/html")
+        }), "text/html")
 
         # send the message
         message.send()

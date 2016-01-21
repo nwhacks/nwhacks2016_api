@@ -1,99 +1,29 @@
 <html>
-  <head>
+  <head style='font-family:"LFT Etica", "Roboto", "Sans"; margin:0; padding:0'>
     <meta name="viewport" content="width=device-width">
-    <style>
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_Book.otf) format("opentype"); }
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_Semibold.otf) format("opentype");
-        font-weight: 500; }
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_Bold.otf) format("opentype");
-        font-weight: bold; }
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_BoldItalic.otf) format("opentype");
-        font-weight: bold;
-        font-style: italic; }
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_Light.otf) format("opentype");
-        font-weight: 200; }
-      @font-face {
-        font-family: "LFT Etica";
-        src: url(/static/font/LFT_Etica_LightItalic.otf) format("opentype");
-        font-weight: lighter;
-        font-style: italic; }
-      .header {
-        text-align: center;
-      }
-      .header .title {
-        background-color: #4bae74;
-        padding: 15px 0;
-      }
-      .header .title img {
-        max-height: 22px;
-        max-width: calc(100% - 50px);
-      }
-      .header .well {
-        background: url(https://www.nwhacks.io/static/img/background_hacker_dark.jpg) no-repeat center / cover;
-      }
-      .header .well td {
-        text-align: center;
-      }
-      .header .well img {
-        margin: 50px;
-        max-height: 200px;
-        max-width: calc(100% - 100px);
-      }
-      body, head {
-        margin: 0;
-        padding: 0;
-        font-family: 'LFT Etica', 'Roboto', 'Sans';
-      }
-      .content {
-        padding: 50px 30px;
-        font-size: 14pt;
-      }
-      .footer {
-        background-color: #3d4658;
-        padding: 10px;
-        color: white;
-        text-align: center;
-      }
-      .footer a {
-        color: #4bae74;
-      }
-      .footer p {
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
+    </head>
+  <body style='font-family:"LFT Etica", "Roboto", "Sans"; margin:0; padding:0'>
+    <div class="header" style="text-align:center" align="center">
       <a href="https://www.nwhacks.io">
-        <div class="title">
-          <img src="https://www.nwhacks.io/static/img/nwhacks-text.png">
+        <div class="title" style="background-color:#4bae74; padding:15px 0" bgcolor="#4bae74">
+          <img src="https://www.nwhacks.io/static/img/nwhacks-text.png" style="max-height:22px; max-width:calc(100% - 50px)">
         </div>
-        <div class="well">
-          <img src="https://www.nwhacks.io/static/img/nwhacks-logo-white.png">
+        <div class="well" style="background:url(https://www.nwhacks.io/static/img/background_hacker_dark.jpg) no-repeat center/cover">
+          <img src="https://www.nwhacks.io/static/img/nwhacks-logo-white.png" style="margin:50px; max-height:200px; max-width:calc(100% - 100px)">
         </div>
       </a>
     </div>
-    <div class="content">
+    <div class="content" style="font-size:14pt; padding:50px 30px">
       <p> Hi {{ name }}, </p>
       <p>
       Thanks for applying to nwHacks! We've received your application and will be reviewing them in the next few weeks. We hope to see you in February!  </p>
       <p> Cheers, </p>
       <p> The nwHacks Team </p>
     </div>
-    <div class="footer">
-      <p>nwHacks 2016</p>
-      <p><a href="https://nwhacks.io">Website</a></p>
-      <p><a href="mailto:sponsorship@nwhacks.io">Email Us</a></p>
+    <div class="footer" style="background-color:#3d4658; color:white; padding:10px; text-align:center" bgcolor="#3d4658" align="center">
+      <p style="margin:0">nwHacks 2016</p>
+      <p style="margin:0"><a href="https://nwhacks.io" style="color:#4bae74">Website</a></p>
+      <p style="margin:0"><a href="mailto:sponsorship@nwhacks.io" style="color:#4bae74">Email Us</a></p>
     </div>
   </body>
 </html>
