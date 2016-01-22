@@ -1,8 +1,13 @@
 from django.conf.urls import include, url
+from django.contrib.auth.decorators import permission_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
+
 from rest_framework import routers, serializers, viewsets, mixins
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, DjangoObjectPermissions
+from rest_framework.response import Response
 
 from .models import Registration
 
@@ -16,7 +21,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
-    http_method_names = ['post']
+    http_method_names = ['get', 'post']
 
     def perform_create(self, serializer):
         # save our instance
@@ -38,6 +43,14 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
         # send the message
         message.send()
+
+    #@permission_required('app.change_registration')
+    @permission_classes((IsAuthenticated, ))
+    @permission_classes((DjangoObjectPermissions, ))
+    def list(self, request):
+        queryset = Registration.objects.all()
+        serializer = RegistrationSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 router = routers.SimpleRouter()
 router.register(r'register', RegistrationViewSet)
