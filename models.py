@@ -23,7 +23,7 @@ class Registration(models.Model):
     personalsite = models.CharField(max_length=200, blank=True, null=True)
     resume = models.FileField(blank=True, null=True)
     tshirt = models.CharField(max_length=4, choices=TSHIRT_SIZES)
-    travel_reinbursement = models.BooleanField()
+    travel_reimbursement = models.BooleanField()
     first_hackathon = models.BooleanField()
     mentor = models.BooleanField()
     reason = models.TextField()
