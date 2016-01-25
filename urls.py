@@ -1,14 +1,11 @@
 from django.conf.urls import include, url
-from django.contrib.auth.decorators import permission_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
-from rest_framework.decorators import detail_route, list_route
 from rest_framework import routers, serializers, viewsets, mixins
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, DjangoObjectPermissions, IsAdminUser, BasePermission
-from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import BasePermission
+from rest_framework.response import Response
 
 from .models import Registration
 
