@@ -16,7 +16,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Registration
         fields = ('id', 'name', 'email', 'school', 'city', 'github', 'linkedin', 'personalsite',
-                  'resume', 'tshirt', 'travel_reinbursement', 'first_hackathon', 'mentor',
+                  'resume', 'tshirt', 'travel_reimbursement', 'first_hackathon', 'mentor',
                   'reason', 'status')
 
 class IsCreationOrIsAuthenticated(BasePermission, SessionAuthentication):
@@ -46,7 +46,7 @@ class RegistrationViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixi
                                          render_to_string("nwhacks2016/email.txt", {
                                              "name": instance.name
                                          }),
-                                         "noreply@nwhacks.io",
+                                         "nwHacks Registration <noreply@nwhacks.io>",
                                          [instance.email],
                                          reply_to=["apply@nwhacks.io"])
 
