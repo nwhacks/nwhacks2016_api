@@ -1,11 +1,14 @@
 from django.conf.urls import include, url
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 from rest_framework import routers, serializers, viewsets, mixins
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import BasePermission
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from .models import Registration
 
@@ -14,7 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = Registration
         fields = ('id', 'name', 'email', 'school', 'city', 'github', 'linkedin', 'personalsite',
                   'resume', 'tshirt', 'travel_reimbursement', 'first_hackathon', 'mentor',
-                  'reason', 'status')
+                  'reason', 'status', 'response')
 
 class IsCreationOrIsAuthenticated(BasePermission, SessionAuthentication):
     def has_permission(self, request, view):
@@ -66,6 +69,25 @@ class RegistrationViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixi
 router = routers.SimpleRouter()
 router.register(r'register', RegistrationViewSet)
 
+@api_view(['POST'])
+def record_response(request, registration_id, token, response_status):
+    registration = get_object_or_404(Registration, pk=registration_id)
+
+    if registration.token != token:
+        # fail if token does not match
+        raise Http404("Registration not found")
+
+    # otherwise set the response status
+    registration.response = response_status
+
+    # save the object
+    registration.save()
+
+    # return a serialized object
+    serializer = RegistrationSerializer(registration)
+    return Response(serializer.data)
+
 urlpatterns = [
+    url(r'^rsvp/(?P<registration_id>\d+)/(?P<token>[a-zA-Z0-9]+)/(?P<response_status>\d+)$', record_response),
     url(r'^', include(router.urls)),
 ]

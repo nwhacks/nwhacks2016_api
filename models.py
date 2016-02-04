@@ -1,4 +1,8 @@
 from django.db import models
+from django.utils.crypto import get_random_string
+
+def get_random_token():
+    return get_random_string(length=32)
 
 # Create your models here.
 class Registration(models.Model):
@@ -13,6 +17,12 @@ class Registration(models.Model):
         (1, "accepted"),
         (2, "waitlisted"),
         (3, "rejected")]
+    RESPONSE = [
+        (0, "no response"),
+        (1, "yes"),
+        (2, "no"),
+        (3, "needs travel reimbursement")
+    ]
 
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
@@ -28,6 +38,8 @@ class Registration(models.Model):
     mentor = models.BooleanField()
     reason = models.TextField()
     status = models.PositiveSmallIntegerField(choices=STATUS, default=0)
+    response = models.PositiveSmallIntegerField(choices=RESPONSE, default=0)
+    token = models.CharField(max_length=32, default=get_random_token)
 
     def __str__(self):
         return self.name
