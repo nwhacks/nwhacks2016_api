@@ -38,6 +38,7 @@ class Registration(models.Model):
     mentor = models.BooleanField()
     reason = models.TextField()
     status = models.PositiveSmallIntegerField(choices=STATUS, default=0)
+    acceptance_sent = models.DateTimeField(blank=True, null=True)
     response = models.PositiveSmallIntegerField(choices=RESPONSE, default=0)
     token = models.CharField(max_length=32, default=get_random_token)
 
