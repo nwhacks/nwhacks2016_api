@@ -17,7 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = Registration
         fields = ('id', 'name', 'email', 'school', 'city', 'github', 'linkedin', 'personalsite',
                   'resume', 'tshirt', 'travel_reimbursement', 'first_hackathon', 'mentor',
-                  'reason', 'status', 'response', 'acceptance_sent')
+                  'reason', 'status', 'response', 'acceptance_sent', 'checked_in')
 
 class IsCreationOrIsAuthenticated(BasePermission, SessionAuthentication):
     def has_permission(self, request, view):
@@ -40,6 +40,7 @@ class RegistrationViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixi
         serializer.status = 0
         serializer.id = 0
         serializer.acceptance_sent = None
+        serializer.checked_in = False
         instance = serializer.save()
 
         # send confirmation email
