@@ -41,7 +41,7 @@ class Registration(models.Model):
     acceptance_sent = models.DateTimeField(blank=True, null=True)
     response = models.PositiveSmallIntegerField(choices=RESPONSE, default=0)
     token = models.CharField(max_length=32, default=get_random_token)
-    checked_in = models.BooleanField()
+    checked_in = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
