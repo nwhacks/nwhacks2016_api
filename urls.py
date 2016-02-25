@@ -17,7 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = Registration
         fields = ('id', 'name', 'email', 'school', 'city', 'github', 'linkedin', 'personalsite',
                   'resume', 'tshirt', 'travel_reimbursement', 'first_hackathon', 'mentor',
-                  'reason', 'status', 'response', 'acceptance_sent', 'checked_in')
+                  'reason', 'status', 'response', 'acceptance_sent', 'checked_in', 'phone')
 
 class IsCreationOrIsAuthenticated(BasePermission, SessionAuthentication):
     def has_permission(self, request, view):
