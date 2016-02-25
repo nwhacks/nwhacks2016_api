@@ -42,6 +42,7 @@ class Registration(models.Model):
     response = models.PositiveSmallIntegerField(choices=RESPONSE, default=0)
     token = models.CharField(max_length=32, default=get_random_token)
     checked_in = models.BooleanField()
+    phone = models.TextField(default='')
 
     def __str__(self):
         return self.name
